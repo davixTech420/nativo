@@ -1,62 +1,86 @@
 import { StatusBar } from "expo-status-bar";
 import { Redirect, router } from "expo-router";
-import { View, Text, Image, ScrollView } from "react-native";
+import { FlatList, View, Text, Image, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
+import Swiper from "react-native-swiper";
 import { images } from "../constants";
 import { CustomButton, Loader } from "../components";
+
 import { useGlobalContext } from "../context/GlobalProvider";
 
 const Welcome = () => {
-  const { loading, isLogged } = useGlobalContext();
+  /*  const { loading, isLogged } = useGlobalContext();
 
-  if (!loading && isLogged) return <Redirect href="/home" />;
+  if (!loading && isLogged) return <Redirect href="/home" />; */
 
+  const imagSli = [
+    {
+      uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrOD_ecG-E-axP3HSisICTyIUU39yFe4z67Q&s",
+    },
+    {
+      uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0FPNcRl4ryvs5HaBQbPEtuJ_rYFJJIWUeXg&s",
+    },
+    {
+      uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp-lld4eqGY6oFi3xKKJYUkVg2Q5GA2whCzA&s",
+    },
+  ];
   return (
-    <SafeAreaView className="bg-primary h-full">
-      <Loader isLoading={loading} />
+    <SafeAreaView className="bg-white h-full">
+      {/* <Loader isLoading={loading} /> */}
 
       <ScrollView
         contentContainerStyle={{
-          height: "100%",
+          height: "80%",
         }}
       >
         <View className="w-full flex justify-center items-center h-full px-4">
           <Image
-            source={images.logo}
+            source={images.lpc}
             className="w-[130px] h-[84px]"
             resizeMode="contain"
           />
 
-          <Image
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            data={imagSli}
+            renderItem={({ item }) => (
+              <View className="aline-center item-center margin-inline-5  ">
+                <Image
+                  source={{ uri: item.uri }}
+                  style={{ width: 300, height: 200, marginInline: 5 }}
+                />
+              </View>
+            )}
+          />
+
+          {/*  <Image
             source={images.cards}
             className="max-w-[380px] w-full h-[298px]"
             resizeMode="contain"
-          />
+          /> */}
 
           <View className="relative mt-5">
-            <Text className="text-3xl text-white font-bold text-center">
-              Discover Endless{"\n"}
-              Possibilities with{" "}
-              <Text className="text-secondary-200">Aora</Text>
+            <Text className="text-3xl text-black font-bold text-center">
+              Transmite LA Energia En Un Show De Teatro {"\n"}
+              <Text className="text-secondary-200">LPC</Text>
             </Text>
 
             <Image
               source={images.path}
-              className="w-[136px] h-[15px] absolute -bottom-2 -right-8"
+              className="w-[250px] h-[15px] absolute -bottom-2 -right-0"
               resizeMode="contain"
             />
           </View>
 
-          <Text className="text-sm font-pregular text-gray-100 mt-7 text-center">
-            Where Creativity Meets Innovation: Embark on a Journey of Limitless
-            Exploration with Aora
+          <Text className="text-sm font-pregular text-gray-500 mt-7 text-center">
+            Explora Los Teatros
           </Text>
 
           <CustomButton
-            title="Continue with Email"
-            handlePress={() => router.push("/sign-in")}
-            containerStyles="w-full mt-7"
+            title="Continua Con Tu Email"
+            handlePress={() => router.push("/sign-up")}
+            containerStyles="w-full "
           />
         </View>
       </ScrollView>

@@ -9,7 +9,7 @@ import { CustomButton, FormField } from "../../components";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
 const SignUp = () => {
-  const { setUser, setIsLogged } = useGlobalContext();
+  const { setUser, setIsLogged } = useGlobalContext(); 
 
   const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
@@ -18,7 +18,7 @@ const SignUp = () => {
     password: "",
   });
 
-  const submit = async () => {
+   const submit = async () => {
     if (form.username === "" || form.email === "" || form.password === "") {
       Alert.alert("Error", "Please fill in all fields");
     }
@@ -28,17 +28,16 @@ const SignUp = () => {
       const result = await createUser(form.email, form.password, form.username);
       setUser(result);
       setIsLogged(true);
-
       router.replace("/home");
     } catch (error) {
-      Alert.alert("Error", error.message);
+      Alert.alert("Error Desde El Mensaje De Registrar", error.message);
     } finally {
       setSubmitting(false);
     }
   };
-
+ 
   return (
-    <SafeAreaView className="bg-primary h-full">
+    <SafeAreaView className="bg-white h-full">
       <ScrollView>
         <View
           className="w-full flex justify-center h-full px-4 my-6"
@@ -47,20 +46,20 @@ const SignUp = () => {
           }}
         >
           <Image
-            source={images.logo}
+            source={images.lpc}
             resizeMode="contain"
             className="w-[115px] h-[34px]"
           />
 
-          <Text className="text-2xl font-semibold text-white mt-10 font-psemibold">
-            Sign Up to Aora
+          <Text className="text-2xl font-semibold text-Black mt-10 font-pblack">
+           Crea Tu Cuenta En LPC 
           </Text>
 
           <FormField
-            title="Username"
+            title="Nombre"
             value={form.username}
             handleChangeText={(e) => setForm({ ...form, username: e })}
-            otherStyles="mt-10"
+            otherStyles="mt-10 "
           />
 
           <FormField
@@ -79,15 +78,15 @@ const SignUp = () => {
           />
 
           <CustomButton
-            title="Sign Up"
-            handlePress={submit}
+            title="Crear Cuenta"
+            handlePress={submit} 
             containerStyles="mt-7"
-            isLoading={isSubmitting}
+             isLoading={isSubmitting} 
           />
 
           <View className="flex justify-center pt-5 flex-row gap-2">
             <Text className="text-lg text-gray-100 font-pregular">
-              Have an account already?
+             Ya Tienes Una Cuenta?
             </Text>
             <Link
               href="/sign-in"

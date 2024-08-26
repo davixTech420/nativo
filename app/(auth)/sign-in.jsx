@@ -9,7 +9,7 @@ import { getCurrentUser, signIn } from "../../lib/appwrite";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
 const SignIn = () => {
-  const { setUser, setIsLogged } = useGlobalContext();
+ const { setUser, setIsLogged } = useGlobalContext(); 
   const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     email: "",
@@ -20,9 +20,7 @@ const SignIn = () => {
     if (form.email === "" || form.password === "") {
       Alert.alert("Error", "Please fill in all fields");
     }
-
     setSubmitting(true);
-
     try {
       await signIn(form.email, form.password);
       const result = await getCurrentUser();
@@ -39,7 +37,7 @@ const SignIn = () => {
   };
 
   return (
-    <SafeAreaView className="bg-primary h-full">
+    <SafeAreaView className="bg-white h-full">
       <ScrollView>
         <View
           className="w-full flex justify-center h-full px-4 my-6"
@@ -48,13 +46,14 @@ const SignIn = () => {
           }}
         >
           <Image
-            source={images.logo}
+            source={images.lpc}
             resizeMode="contain"
             className="w-[115px] h-[34px]"
           />
 
-          <Text className="text-2xl font-semibold text-white mt-10 font-psemibold">
-            Log in to Aora
+          <Text className="text-2xl font-semibold text-black mt-10 font-pblack">
+            {" "}
+            Inicia Secion LPC
           </Text>
 
           <FormField
@@ -66,14 +65,14 @@ const SignIn = () => {
           />
 
           <FormField
-            title="Password"
+            title="Contraseña"
             value={form.password}
             handleChangeText={(e) => setForm({ ...form, password: e })}
             otherStyles="mt-7"
           />
 
           <CustomButton
-            title="Sign In"
+            title="Iniciar Secion"
             handlePress={submit}
             containerStyles="mt-7"
             isLoading={isSubmitting}
@@ -81,13 +80,13 @@ const SignIn = () => {
 
           <View className="flex justify-center pt-5 flex-row gap-2">
             <Text className="text-lg text-gray-100 font-pregular">
-              Don't have an account?
+              No Tienes Una Cuenta?
             </Text>
             <Link
-              href="/sign-up"
+              href="/home"
               className="text-lg font-psemibold text-secondary"
             >
-              Signup
+              Registrate
             </Link>
           </View>
         </View>

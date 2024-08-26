@@ -9,8 +9,8 @@ import { useGlobalContext } from "../../context/GlobalProvider";
 import { EmptyState, InfoBox, VideoCard } from "../../components";
 
 const Profile = () => {
-  const { user, setUser, setIsLogged } = useGlobalContext();
-  const { data: posts } = useAppwrite(() => getUserPosts(user.$id));
+ /*  const { user, setUser, setIsLogged } = useGlobalContext();
+  const { data: posts } = useAppwrite(() => getUserPosts(user.$id)); */
 
   const logout = async () => {
     await signOut();
@@ -23,7 +23,7 @@ const Profile = () => {
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
-        data={posts}
+        /* data={posts} */
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
           <VideoCard
@@ -55,21 +55,21 @@ const Profile = () => {
 
             <View className="w-16 h-16 border border-secondary rounded-lg flex justify-center items-center">
               <Image
-                source={{ uri: user?.avatar }}
+                /* source={{ uri: user?.avatar }} */
                 className="w-[90%] h-[90%] rounded-lg"
                 resizeMode="cover"
               />
             </View>
 
-            <InfoBox
-              title={user?.username}
+            < InfoBox
+             /* title={user?.username} */
               containerStyles="mt-5"
               titleStyles="text-lg"
             />
 
             <View className="mt-5 flex flex-row">
               <InfoBox
-                title={posts.length || 0}
+              /*   title={posts.length || 0} */
                 subtitle="Posts"
                 titleStyles="text-xl"
                 containerStyles="mr-10"
